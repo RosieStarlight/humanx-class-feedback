@@ -64,7 +64,7 @@
   .step.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-  .q{margin:0 0 20px}
+  .q{margin:0 0 22px}
   .q:last-child{margin-bottom:6px}
   label.lbl{font-family:var(--font-ui);display:block;font-weight:600;font-size:16px;color:var(--ink);margin:0 0 4px;line-height:1.35}
   .hint{color:var(--muted);font-size:13.5px;margin:0 0 10px;line-height:1.45}
@@ -76,7 +76,7 @@
     background:#FBFEFF;border:1.5px solid var(--line);border-radius:14px;
     padding:13px 14px;outline:none;transition:border-color .15s,box-shadow .15s;
   }
-  textarea{min-height:96px;resize:vertical;line-height:1.5}
+  textarea{min-height:110px;resize:vertical;line-height:1.5}
   input:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(14,157,184,.14)}
 
   .rating{display:flex;gap:8px;flex-wrap:wrap}
@@ -115,10 +115,9 @@
   .tick.ck .box svg{opacity:1}
   .tick.ck{border-color:var(--teal);background:#F1FBFD}
   .tick .txt{font-family:var(--font-ui);font-weight:500;font-size:14.5px;line-height:1.4}
-  .tick .txt small{display:block;font-family:"Nunito Sans",sans-serif;font-weight:400;color:var(--muted);font-size:13px;margin-top:2px}
   .tickgrid{display:grid;gap:10px}
 
-  .reveal{display:none;margin-top:14px;padding-left:2px;border-left:3px solid var(--cyan);padding-left:14px}
+  .reveal{display:none;margin-top:14px;border-left:3px solid var(--cyan);padding-left:14px}
   .reveal.show{display:block;animation:fade .25s ease}
 
   .consent{margin-top:8px}
@@ -195,14 +194,17 @@
       <!-- STEP 2 -->
       <section class="step" data-step="2">
         <div class="q">
-          <label class="lbl" for="liked">What did you like most about the call?</label>
-          <p class="hint">The part that landed, the moment it clicked, the thing you'll remember.</p>
-          <textarea id="liked" name="liked" placeholder="What stood out to you..."></textarea>
+          <label class="lbl" for="gotout">What did you get out of it?</label>
+          <p class="hint">What can you do now that you couldn't before? The takeaway, the win, the thing that clicked.</p>
+          <textarea id="gotout" name="gotout" placeholder="What you walked away with..." style="min-height:130px"></textarea>
         </div>
         <div class="q">
-          <label class="lbl" for="gotout">What did you get out of it?</label>
-          <p class="hint">What can you actually do now that you couldn't before?</p>
-          <textarea id="gotout" name="gotout" placeholder="The takeaway, the win, the thing you walked away with..."></textarea>
+          <label class="lbl">Have you started running prompts with Claude yet?</label>
+          <div class="choices" data-single="started_prompts">
+            <label class="choice"><input type="radio" name="started_prompts" value="Yes, I'm in there doing it"><span class="box"></span><span>Yes, I'm in there doing it</span></label>
+            <label class="choice"><input type="radio" name="started_prompts" value="A little, just poking around"><span class="box"></span><span>A little, just poking around</span></label>
+            <label class="choice"><input type="radio" name="started_prompts" value="Not yet"><span class="box"></span><span>Not yet</span></label>
+          </div>
         </div>
       </section>
 
@@ -217,21 +219,23 @@
           <label class="lbl" for="next">What would you love to learn in the next class?</label>
           <textarea id="next" name="next" placeholder="Topics, questions, or a specific thing you're stuck on..."></textarea>
         </div>
-        <div class="q">
-          <label class="lbl">Would a little 1:1 help getting set up be useful?</label>
-          <div class="choices" data-single="help">
-            <label class="choice"><input type="radio" name="help" value="Yes please, I'd love a hand"><span class="box"></span><span>Yes please, I'd love a hand</span></label>
-            <label class="choice"><input type="radio" name="help" value="Maybe later"><span class="box"></span><span>Maybe later</span></label>
-            <label class="choice"><input type="radio" name="help" value="No, I'm good on my own"><span class="box"></span><span>No, I'm good on my own</span></label>
-          </div>
-        </div>
       </section>
 
-      <!-- STEP 4 — the tools (fully optional, tick-gated) -->
+      <!-- STEP 4 — guide + tools (optional, tick-gated) -->
       <section class="step" data-step="4">
         <div class="q">
-          <label class="lbl">Did you grab either of the tools? <span class="optional-tag">Optional</span></label>
-          <p class="hint">Only if you did. Tick what you got and a quick question will pop up. Nothing to tick? Just hit Next.</p>
+          <label class="lbl">Did you read the free guide first, or jump straight to the Kit?</label>
+          <div class="choices" data-single="guide_path">
+            <label class="choice"><input type="radio" name="guide_path" value="Read the guide first"><span class="box"></span><span>Read the guide first</span></label>
+            <label class="choice"><input type="radio" name="guide_path" value="A bit of both"><span class="box"></span><span>A bit of both</span></label>
+            <label class="choice"><input type="radio" name="guide_path" value="Skipped straight to the Kit"><span class="box"></span><span>Skipped straight to the Kit</span></label>
+            <label class="choice"><input type="radio" name="guide_path" value="Haven't dug into either yet"><span class="box"></span><span>Haven't dug into either yet</span></label>
+          </div>
+        </div>
+
+        <div class="q">
+          <label class="lbl">Which did you grab? <span class="optional-tag">Optional</span></label>
+          <p class="hint">Tick what you got and a quick question pops up. Nothing to tick? Just hit Next.</p>
           <div class="tickgrid">
             <label class="tick" data-tick="kit">
               <input type="checkbox" id="got_kit" name="got_kit" value="Yes">
@@ -271,12 +275,40 @@
         </div>
       </section>
 
-      <!-- STEP 5 — feelings + consent -->
+      <!-- STEP 5 — feeling scales + consent -->
       <section class="step" data-step="5">
         <div class="q">
-          <label class="lbl" for="feeling">After the class, how are you feeling about AI and Claude?</label>
-          <p class="hint">A few sentences, however it's sitting with you right now. Excited, relieved, still nervous, all of it. There's no wrong answer.</p>
-          <textarea id="feeling" name="feeling" placeholder="Where you're at with AI and Claude now..." style="min-height:120px"></textarea>
+          <label class="lbl">How confident do you feel using Claude now?</label>
+          <div class="rating" data-single="feel_confident">
+            <input type="radio" name="feel_confident" id="fc1" value="1"><label for="fc1">1</label>
+            <input type="radio" name="feel_confident" id="fc2" value="2"><label for="fc2">2</label>
+            <input type="radio" name="feel_confident" id="fc3" value="3"><label for="fc3">3</label>
+            <input type="radio" name="feel_confident" id="fc4" value="4"><label for="fc4">4</label>
+            <input type="radio" name="feel_confident" id="fc5" value="5"><label for="fc5">5</label>
+          </div>
+          <div class="scale"><span>1 · Still lost</span><span>5 · I've got this</span></div>
+        </div>
+        <div class="q">
+          <label class="lbl">How safe and at ease do you feel about AI after the class?</label>
+          <div class="rating" data-single="feel_safe">
+            <input type="radio" name="feel_safe" id="fs1" value="1"><label for="fs1">1</label>
+            <input type="radio" name="feel_safe" id="fs2" value="2"><label for="fs2">2</label>
+            <input type="radio" name="feel_safe" id="fs3" value="3"><label for="fs3">3</label>
+            <input type="radio" name="feel_safe" id="fs4" value="4"><label for="fs4">4</label>
+            <input type="radio" name="feel_safe" id="fs5" value="5"><label for="fs5">5</label>
+          </div>
+          <div class="scale"><span>1 · Still nervous</span><span>5 · Totally at ease</span></div>
+        </div>
+        <div class="q">
+          <label class="lbl">How excited are you about what's now possible?</label>
+          <div class="rating" data-single="feel_excited">
+            <input type="radio" name="feel_excited" id="fe1" value="1"><label for="fe1">1</label>
+            <input type="radio" name="feel_excited" id="fe2" value="2"><label for="fe2">2</label>
+            <input type="radio" name="feel_excited" id="fe3" value="3"><label for="fe3">3</label>
+            <input type="radio" name="feel_excited" id="fe4" value="4"><label for="fe4">4</label>
+            <input type="radio" name="feel_excited" id="fe5" value="5"><label for="fe5">5</label>
+          </div>
+          <div class="scale"><span>1 · Meh</span><span>5 · Can't wait</span></div>
         </div>
         <div class="q">
           <label class="lbl" for="anything">Anything else you'd like to add?</label>
@@ -310,11 +342,14 @@
 
 <script>
 /* =========================================================================
-   1) PASTE YOUR GOOGLE APPS SCRIPT URL BETWEEN THE QUOTES BELOW.
-      (Setup steps are in "Connect quiz to Google Sheet (2-min setup).md")
-      Until you do, the quiz still works and logs answers to the console.
+   ENDPOINTS
+   1) SHEET_ENDPOINT — your Google Apps Script web app (writes to the sheet).
+   2) GHL_WEBHOOK_URL — leave "" for now. Later, when we build the GHL
+      attendee workflow, paste its Inbound Webhook URL here and every
+      submission will also flow into GoHighLevel (tag + trigger the sequence).
    ========================================================================= */
 const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbzmw9yxlXM4huddOIFc40q9zyRKc3O5poPukykHXcNnEVdK1dpzGH9_DQFMgjBwmTij/exec";
+const GHL_WEBHOOK_URL = "";
 
 const form = document.getElementById('quiz');
 const steps = [...document.querySelectorAll('.step')];
@@ -324,12 +359,12 @@ let current = 0;
 
 const titles = [
   {t:"How was the Starter Call for you?", s:"A few quick questions so the next class is even better. Answer what you like, skip what you don't."},
-  {t:"What worked?", s:"The good stuff. What you liked and what you're taking away."},
-  {t:"What's next?", s:"Where I can go deeper, and where you'd like more help."},
-  {t:"The tools you got", s:"Totally optional. A couple of quick reads on the kit, only if you grabbed it."},
+  {t:"What worked?", s:"What you're walking away able to do."},
+  {t:"What's next?", s:"Where I can go deeper, and what you'd like to learn."},
+  {t:"The guide & the kit", s:"A couple of optional reads on how it's going with the tools."},
   {t:"How you're feeling now", s:"The bit I care about most. Where you're at with AI after the class."}
 ];
-const metas = ["About the call","What worked","What's next","The tools","How you're feeling"];
+const metas = ["About the call","What worked","What's next","Guide & kit","How you're feeling"];
 
 // build progress pips
 steps.forEach(()=>{const d=document.createElement('div');d.className='pip';pipsWrap.appendChild(d);});
@@ -398,6 +433,15 @@ nextBtn.addEventListener('click',()=>{
 });
 backBtn.addEventListener('click',()=>{ if(current>0){current--;render();} });
 
+async function post(url,data){
+  return fetch(url,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify(data)
+  });
+}
+
 async function submit(){
   nextBtn.disabled=true; backBtn.disabled=true;
   nextBtn.innerHTML='<span class="spinner"></span>Sending...';
@@ -411,14 +455,12 @@ async function submit(){
 
   try{
     if(SHEET_ENDPOINT && !SHEET_ENDPOINT.startsWith('PASTE_')){
-      await fetch(SHEET_ENDPOINT,{
-        method:'POST',
-        mode:'no-cors',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body:JSON.stringify(data)
-      });
+      await post(SHEET_ENDPOINT, data);
     } else {
-      console.log('Quiz response (endpoint not set yet):',data);
+      console.log('Quiz response (sheet endpoint not set):',data);
+    }
+    if(GHL_WEBHOOK_URL && GHL_WEBHOOK_URL.length>0 && !GHL_WEBHOOK_URL.startsWith('PASTE_')){
+      await post(GHL_WEBHOOK_URL, data);
     }
   }catch(e){ console.warn('Submit issue (response still captured):',e); }
 
